@@ -26,12 +26,14 @@ export const App: React.FC = () => {
       setAllTodos(data);
       setTodos(data);
     });
-    getUser(userId).then(data => {
-      setUser(data);
-    });
+    if (userId) {
+      getUser(userId).then(data => {
+        setUser(data);
+      });
+    }
   }, [userId]);
 
-  function filterTodods(searchTerm: string, status: boolean | null) {
+  function filterTodos(searchTerm: string, status: boolean | null) {
     let filtered = allTodos;
 
     if (searchTerm) {
@@ -68,7 +70,7 @@ export const App: React.FC = () => {
             <h1 className="title">Todos:</h1>
 
             <div className="block">
-              <TodoFilter filterTodos={filterTodods} />
+              <TodoFilter filterTodos={filterTodos} />
             </div>
 
             <div className="block">
